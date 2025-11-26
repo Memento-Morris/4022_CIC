@@ -1,20 +1,10 @@
 # Anomaly-Based NIDS for Resource-Constrained Networks using Machine Learning
 
-This repository contains the code, documentation, and resources for my MBA's thesis project, "Anomaly-based intrusion detection in resource-limited networks." The project focuses on developing a practical Network Intrusion Detection System (NIDS) tailored for environments with limited computational resources, such as those found in small businesses or IoT deployments, typically utilizing devices like the Raspberry Pi. The research leverages the CICIDS2017 dataset for model training and initial evaluation, with a final prototype validated using real network traffic captures.
-
-**View the Full Thesis (Soon)**
-
-## Project Overview
-
-The primary goal of this research was to explore and develop an effective, yet lightweight, machine learning-based NIDS suitable for deployment on resource-constrained hardware. Traditional NIDS solutions often demand significant processing power and memory, making them impractical for small businesses or edge devices. This project investigates various machine learning algorithms, ultimately developing a prototype that balances detection accuracy with operational efficiency.
-
-A key finding of this research was the superior real-world applicability of instance-based learners like K-Nearest Neighbors (KNN) in dynamic network environments. While tree-based ensemble models like XGBoost demonstrated high accuracy on the curated CICIDS2017 dataset during training, the KNN model proved more adaptable and effective when an NIDS prototype was validated against replayed network traffic (pcap files) in a simulated production environment.
 
 ## Key Features
 
 - **Resource-Constrained Focus:** The final NIDS prototype is designed with low-power devices like the Raspberry Pi 5 in mind, emphasizing minimal CPU and memory footprint during operation.
 - **Anomaly-Based Detection:** Aims to identify deviations from normal network behavior, enabling the detection of both known and novel threats.
-- **KNN-Powered Detection Core:** The operational NIDS prototype utilizes a K-Nearest Neighbors (KNN) model, chosen for its robust performance in simulated real-world traffic scenarios and its low computational overhead.
 - **Real-time Traffic Analysis:** Employs `scapy` for live packet capture and feature extraction from network traffic.
 - **User-Friendly Interface:** Includes a simple graphical user interface (GUI) built with Tkinter for starting/stopping the NIDS, viewing alerts, and monitoring basic statistics.
 - **Practical Validation:** The NIDS prototype was validated by replaying real network traffic captures (CICIDS2017 pcap files) using `tcpreplay` in a controlled environment.
@@ -37,49 +27,14 @@ The project was conducted in the following stages:
     - Performance was assessed using metrics such as accuracy, precision, recall, F1-score, and resource consumption (training time, CPU/memory usage).
     - Hyperparameter tuning was performed using `RandomizedSearchCV`.
     - Jupyter Notebooks:
-      - Supervised Models: `cicids2017-ml-models-comparison-supervised.ipynb` ([Kaggle Version](https://www.kaggle.com/code/ericanacletoribeiro/cicids2017-ml-models-comparison-supervised))
-      - Unsupervised Models: `cicids2017-ml-models-comparison-unsupervised.ipynb` ([Kaggle Version](https://www.kaggle.com/code/ericanacletoribeiro/cicids2017-ml-models-comparison-unsupervised))
+      - Supervised Models: `Supervised.ipynb` 
+      - Unsupervised Models: `Unsupervised.ipynb` 
 
 3.  **NIDS Prototype Development and Validation:**
     - Development of a functional NIDS prototype in Python, integrating the selected machine learning model (KNN) for its practical performance.
     - The `prototype/nids_prototype_knn.py` script contains the `NetworkAnomalyDetector` class for packet processing and feature extraction, and the `NetworkAnomalyGUI` class for the user interface.
     - The prototype was validated on a Raspberry Pi 5 by replaying CICIDS2017 pcap files using `tcpreplay` to simulate network attacks (e.g., DoS, Port Scan, Botnet). This method allowed for direct comparison against known traffic patterns.
 
-<br>
-
-![NIDS Prototype on Pi 5](./images/prototype_pi.png)
-
-## Repository Structure
-
-```
-├── ml_models/ # Trained machine learning models and scalers
-│ ├── supervised/
-│ │ ├── knn_model.joblib
-│ │ └── ... (other supervised models)
-│ ├── unsupervised/
-│ │ └── ... (unsupervised models)
-│ └── scalars/
-│   ├── robust_scalar_supervised.joblib
-│   └── robust_scalar_unsupervised.joblib
-│
-├── prototype/ # NIDS application code
-│ ├── nids_knn.py # Main NIDS script with KNN model
-│ ├── nids_xgboost.py # (Exploratory) NIDS script with XGBoost model
-│ └── nids_alerts/ # Directory where alert logs are saved (created at runtime)
-│
-├── pcaps/ # (Optional) Directory for storing pcap files for testing
-│   # Note: For CICIDS2017 pcaps, download from the official source.
-│
-│   # Jupyter Notebooks
-├── cicids2017-comprehensive-data-processing-for-ml.ipynb
-├── cicids2017-ml-models-comparison-supervised.ipynb
-├── cicids2017-ml-models-comparison-unsupervised.ipynb
-│
-├── .gitignore
-├── .gitattributes
-├── LICENSE
-└── README.md
-```
 
 ## Getting Started
 
